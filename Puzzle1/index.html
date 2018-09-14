@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Puzzle 1 - Codingmart Technologies
+	</title>
+	<script src="jquery-1.11.1.min.js"></script>
+	<style>
+		.panel{
+			height:700px;
+			width: 100%;
+			position: relative;
+			border: 1px solid #00a;
+			overflow: hidden;
+			background-image: url('street.png');
+			background-size: cover;
+		}
+		.person img {
+			height: 200px;
+		}
+		.person{
+			display: inline-block;
+			position: absolute;
+			bottom: 0px;
+			-webkit-transition: all 0.1s ease-in-out;
+			   -moz-transition: all 0.1s ease-in-out;
+			    -ms-transition: all 0.1s ease-in-out;
+			     -o-transition: all 0.1s ease-in-out;
+			        transition: all 0.1s ease-in-out;
+		}
+		.pillar{
+			bottom: 0px;
+			position: absolute;
+			background-image: url('building.jpg');
+			background-size: 20px 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="panel">
+		<div class="person">
+			<img src="person.gif" alt="">
+		</div>
+	</div>
+	<script>
+		$(document).ready(function($) {
+			function createElement(height,width) {
+				newElement = $('<span/>',{
+					class: "pillar",
+				})
+				rightSize = width + 5
+				leftSize = width + 600 +5
+				newElement.css({height: height+'px', width: width+'px',left: leftSize+'px'})
+				newElement.appendTo('.panel')
+				newElement.animate({
+					left: '-'+rightSize+'px'
+				},3000, function() {
+					newElement.remove()
+					redraw()
+				});
+			}
+			function redraw(){
+				height = Math.floor(Math.random() * (300 - 10)) + 10
+				width = Math.floor(Math.random() * (300 - 30)) + 30
+				createElement(height,width)
+			}
+			redraw()
+
+			function checkPillar(){
+				setTimeout(function() {
+					Jump()
+					checkPillar()
+				})
+			}
+			checkPillar()
+			function Jump(){
+				$(window).keypress(function (e) {
+  						if (e.key === ' ' || e.key === 'Spacebar') {
+  							
+    					e.preventDefault()
+  }
+})
+			}
+		});
+	</script>
+</body>
+</html>
