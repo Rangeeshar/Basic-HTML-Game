@@ -16,7 +16,7 @@
 			background-size: cover;
 		}
 		.person img {
-			height: 200px;
+			height: 175px;
 		}
 		.person{
 			display: inline-block;
@@ -37,9 +37,9 @@
 	</style>
 </head>
 <body>
-	<div class="panel">
+	<div class="panel" id='pan'>
 		<div class="person">
-			<img src="person.gif" alt="">
+			<img id ="pika" src="person.gif" alt="">
 		</div>
 	</div>
 	<script>
@@ -63,6 +63,7 @@
 				height = Math.floor(Math.random() * (300 - 10)) + 10
 				width = Math.floor(Math.random() * (300 - 30)) + 30
 				createElement(height,width)
+				document.getElementById('pika').style.margin='0px';
 			}
 			redraw()
 
@@ -70,14 +71,17 @@
 				setTimeout(function() {
 					Jump()
 					checkPillar()
-				})
+				},500)
 			}
 			checkPillar()
 			function Jump(){
+
 				$(window).keypress(function (e) {
   						if (e.key === ' ' || e.key === 'Spacebar') {
-  							
-    					e.preventDefault()
+  							var h =$('.pillar:visible').height(); // will give you calculated height
+  							var t= h-15;
+  							document.getElementById('pika').style.margin= t+'px';
+    					
   }
 })
 			}
